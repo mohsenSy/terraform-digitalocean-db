@@ -1,0 +1,27 @@
+---
+do_clusters:
+  - engine: mysql
+    name: sql-db
+    size: db-s-1vcpu-1gb
+    region: fra1
+    node_count: 1
+    db_version: 8
+    users:
+      - mouhsen
+      - sami
+      - nodar
+  - engine: pg
+    name: pg-db
+    size: db-s-1vcpu-1gb
+    region: fra1
+    node_count: 1
+    db_version: 11
+    pools:
+      - name: con-pool
+        mode: transaction
+        size: 20
+        db_name: users
+        user: pguser
+    tags:
+      - pg
+      - users-service

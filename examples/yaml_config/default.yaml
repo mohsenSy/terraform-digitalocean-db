@@ -1,0 +1,12 @@
+---
+eviction_policy: allkeys_lru
+firewall_rules: []
+maintenance_window:
+  day: tuesday
+  hour: 01:00:00
+pools: []
+replicas: []
+sql_mode: ANSI,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION,NO_ZERO_DATE,NO_ZERO_IN_DATE,STRICT_ALL_TABLES
+tags: []
+users: []
+private_network_uuid: ""
