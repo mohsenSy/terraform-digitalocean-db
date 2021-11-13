@@ -2,10 +2,10 @@
 module "pg_db" {
   source = "github.com/mohsensy/terraform-digitalocean-db"
 
-  name = "pg_db"
-  engine = "pg"
-  size = "db-s-1vcpu-1gb"
-  region = "fra1"
+  name       = "pg_db"
+  engine     = "pg"
+  size       = "db-s-1vcpu-1gb"
+  region     = "fra1"
   node_count = 1
   db_version = "11"
 
@@ -18,5 +18,5 @@ output "host" {
 
 output "passwords" {
   sensitive = true
-  value = module.pg_db.passwords
+  value     = module.pg_db.passwords
 }
