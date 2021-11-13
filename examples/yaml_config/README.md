@@ -9,7 +9,7 @@ This is an example config file:
 
 ```
 do_clusters:
-  - engine: monogdb
+  - engine: mongodb
     name: mongo-db
     size: db-s-1vcpu-1gb
     region: fra1
