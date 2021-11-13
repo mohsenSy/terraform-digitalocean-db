@@ -1,37 +1,47 @@
 output "host" {
-  value = local.host
+  description = "The public hostname for the database cluster"
+  value = chomp(local.host)
 }
 
 output "uri" {
-  value = local.uri
+  description = "The public URI used to connect to the cluster"
+  value = chomp(local.uri)
 }
 
 output "private_host" {
-  value = local.private_host
+  description = "The private hostname for the database cluster"
+  value = chomp(local.private_host)
 }
 
 output "private_uri" {
-  value = local.private_uri
+  description = "The private URI used to connect to the cluster"
+  value = chomp(local.private_uri)
 }
 
 output "port" {
-  value = local.port
+  description = "The port used to connect to the cluster"
+  value = chomp(local.port)
 }
 
 output "id" {
-  value = local.id
+  description = "The cluster's ID"
+  value = chomp(local.id)
 }
 
 output "database" {
-  value = local.database
+  description = "the cluster's default database"
+  value = chomp(local.database)
 }
 
 output "user" {
-  value = local.user
+  description = "The cluster's default user"
+  value = chomp(local.user)
 }
 
 output "password" {
-  value = local.password
+  description = "The cluster's default user password"
+  sensitive = true
+  value = chomp(local.password)
 }
 
 output "passwords" {

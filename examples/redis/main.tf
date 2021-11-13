@@ -1,6 +1,7 @@
 
 module "redis_db" {
-  source = "github.com/mohsensy/terraform-digitalocean-db"
+  source  = "mohsenSy/db/digitalocean"
+  version = "0.2.0"
 
   name       = "redis_db"
   engine     = "redis"

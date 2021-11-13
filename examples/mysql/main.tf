@@ -1,6 +1,7 @@
 
 module "sql_db" {
-  source = "github.com/mohsensy/terraform-digitalocean-db"
+  source  = "mohsenSy/db/digitalocean"
+  version = "0.2.0"
 
   name       = "sql_db"
   engine     = "mysql"
