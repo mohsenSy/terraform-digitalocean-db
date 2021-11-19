@@ -30,7 +30,7 @@ variable "tags" {
 
 variable "private_network_uuid" {
   description = "The UUID of the network to be connected to the cluster"
-  default     = null
+  default     = ""
 }
 
 variable "eviction_policy" {
