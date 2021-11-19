@@ -25,52 +25,52 @@ variable "db_version" {
 
 variable "tags" {
   description = "The tags to be applied to the cluster"
-  default = []
+  default     = []
 }
 
 variable "private_network_uuid" {
   description = "The UUID of the network to be connected to the cluster"
-  default = ""
+  default     = null
 }
 
 variable "eviction_policy" {
   description = "A string specifying the eviction policy for a Redis cluster"
-  default = "allkeys_lru"
+  default     = "allkeys_lru"
 }
 
 variable "sql_mode" {
   description = " A comma separated string specifying the SQL modes for a MySQL cluster"
-  default = "ANSI,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION,NO_ZERO_DATE,NO_ZERO_IN_DATE,STRICT_ALL_TABLES"
+  default     = "ANSI,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION,NO_ZERO_DATE,NO_ZERO_IN_DATE,STRICT_ALL_TABLES"
 }
 
 variable "maintenance_window" {
   description = "Defines when the automatic maintenance should be performed for the database cluster."
   type = object({
-      day = string
-      hour = string
+    day  = string
+    hour = string
   })
   default = {
-    day = "tuesday"
+    day  = "tuesday"
     hour = "01:00:00"
   }
 }
 
 variable "firewall_rules" {
   description = "The firewall rules applied for the cluster"
-  default = []
+  default     = []
 }
 
 variable "users" {
   description = "A list of database users to create"
-  default = []
+  default     = []
 }
 
 variable "replicas" {
   description = "Database read replicas"
-  default = []
+  default     = []
 }
 
 variable "pools" {
   description = "Database connection pools"
-  default = []
+  default     = []
 }

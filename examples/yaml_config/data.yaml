@@ -25,3 +25,5 @@ do_clusters:
     tags:
       - pg
       - users-service
+    replicas:
+    - name: rep1

@@ -9,4 +9,4 @@ replicas: []
 sql_mode: ANSI,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION,NO_ZERO_DATE,NO_ZERO_IN_DATE,STRICT_ALL_TABLES
 tags: []
 users: []
-private_network_uuid: ""
+private_network_uuid: null
