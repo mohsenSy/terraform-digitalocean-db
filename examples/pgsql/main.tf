@@ -1,7 +1,7 @@
 
 module "pg_db" {
   source  = "mohsenSy/db/digitalocean"
-  version = "0.2.1"
+  version = "0.3.0"
 
   name       = "pg-db"
   engine     = "pg"
@@ -10,7 +10,8 @@ module "pg_db" {
   node_count = 1
   db_version = "11"
 
-  users = ["mouhsen", "sami"]
+  users     = ["mouhsen", "sami"]
+  databases = ["users"]
 
   pools = [{
     name    = "pool1"

@@ -36,7 +36,7 @@ EOF
 EOF
 
 
-  passwords = zipmap(var.users, concat(digitalocean_database_user.redis_users[*].password, digitalocean_database_user.mongodb_users[*].password, digitalocean_database_user.pg_users[*].password, digitalocean_database_user.sql_users[*].password))
+  passwords = zipmap(var.users, concat(digitalocean_database_user.mongodb_users[*].password, digitalocean_database_user.pg_users[*].password, digitalocean_database_user.sql_users[*].password))
 
 }
 resource "digitalocean_database_cluster" "do_sql" {
@@ -175,13 +175,6 @@ resource "digitalocean_database_db" "sql_dbs" {
   name       = var.databases[count.index]
 }
 
-resource "digitalocean_database_db" "redis_dbs" {
-  count = var.engine == "redis" ? length(var.databases) : 0
-
-  cluster_id = digitalocean_database_cluster.do_redis[0].id
-  name       = var.databases[count.index]
-}
-
 resource "digitalocean_database_db" "pg_dbs" {
   count = var.engine == "pg" ? length(var.databases) : 0
 
@@ -202,13 +195,6 @@ resource "digitalocean_database_user" "sql_users" {
   cluster_id = digitalocean_database_cluster.do_sql[0].id
 
   name = var.users[count.index]
-}
-
-resource "digitalocean_database_user" "redis_users" {
-  count = var.engine == "redis" ? length(var.users) : 0
-
-  cluster_id = digitalocean_database_cluster.do_redis[0].id
-  name       = var.users[count.index]
 }
 
 resource "digitalocean_database_user" "pg_users" {
@@ -234,7 +220,7 @@ resource "digitalocean_database_replica" "pg_replicas" {
   name                 = var.replicas[count.index].name
   size                 = lookup(var.replicas[count.index], "size", var.size)
   region               = lookup(var.replicas[count.index], "region", var.region)
-  tags                 = lookup(var.replicas[count.index], "tags", [])
+  tags                 = lookup(var.replicas[count.index], "tags", var.tags)
   private_network_uuid = lookup(var.replicas[count.index], "private_network_uuid", null)
 }
 

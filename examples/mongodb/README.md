@@ -1,6 +1,6 @@
 # Mongodb cluster
 
-This small example shows how to create a mongodb database cluster in Digital Ocean, we are creating two users
+This small example shows how to create a mongodb database cluster in Digital Ocean, we are creating two users, one database called `users`
 and we defined two outputs, the first is called `host` whch holds the hostname for the cluster and
 the other is called `passwords` which is a tuple of passwords assigned to the two users we are creating.
 
