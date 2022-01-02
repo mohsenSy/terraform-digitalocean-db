@@ -46,16 +46,16 @@ output "password" {
 
 output "passwords" {
   description = "The generated passords for the created users as a key/value object"
-  sensitive = true
-  value     = local.passwords
+  sensitive   = true
+  value       = local.passwords
 }
 
 output "replicas" {
   description = "A list of created replia objects"
-  value = digitalocean_database_replica.pg_replicas
+  value       = digitalocean_database_replica.pg_replicas
 }
 
 output "pools" {
   description = "A list of created connetcion pool objects"
-  value = digitalocean_database_connection_pool.pg_pools
+  value       = digitalocean_database_connection_pool.pg_pools
 }
