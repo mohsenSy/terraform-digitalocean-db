@@ -27,3 +27,5 @@ do_clusters:
       - users-service
     replicas:
     - name: rep1
+    databases:
+    - users

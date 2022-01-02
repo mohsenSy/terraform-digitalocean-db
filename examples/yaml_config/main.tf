@@ -10,7 +10,7 @@ locals {
 
 module "dodbs" {
   source  = "mohsenSy/db/digitalocean"
-  version = "0.2.1"
+  version = "0.3.1"
 
   for_each = local.do_dbs
 
@@ -29,5 +29,6 @@ module "dodbs" {
   users                = each.value.users
   sql_mode             = each.value.sql_mode
   tags                 = each.value.tags
+  databases            = each.value.databases
 
 }

@@ -60,6 +60,12 @@ variable "firewall_rules" {
   default     = []
 }
 
+variable "databases" {
+  type        = list(string)
+  description = "A list of database names to create in the cluster."
+  default     = []
+}
+
 variable "users" {
   description = "A list of database users to create"
   default     = []

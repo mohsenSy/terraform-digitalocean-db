@@ -67,6 +67,7 @@ resource "digitalocean_database_cluster" "do_redis" {
   region     = var.region
   node_count = var.node_count
   version    = var.db_version
+  tags       = var.tags
 
   eviction_policy = var.eviction_policy
   maintenance_window {
@@ -85,6 +86,7 @@ resource "digitalocean_database_cluster" "do_pg" {
   region     = var.region
   node_count = var.node_count
   version    = var.db_version
+  tags       = var.tags
 
   maintenance_window {
     day  = var.maintenance_window.day
@@ -102,6 +104,7 @@ resource "digitalocean_database_cluster" "do_mongodb" {
   region     = var.region
   node_count = var.node_count
   version    = var.db_version
+  tags       = var.tags
 
   maintenance_window {
     day  = var.maintenance_window.day
@@ -164,19 +167,33 @@ resource "digitalocean_database_firewall" "mongodb_firewall" {
   }
 }
 
+resource "digitalocean_database_db" "sql_dbs" {
+  count = var.engine == "mysql" ? length(var.databases) : 0
+
+  cluster_id = digitalocean_database_cluster.do_sql[0].id
+  name       = var.databases[count.index]
+}
+
+resource "digitalocean_database_db" "pg_dbs" {
+  count = var.engine == "pg" ? length(var.databases) : 0
+
+  cluster_id = digitalocean_database_cluster.do_pg[0].id
+  name       = var.databases[count.index]
+}
+
+resource "digitalocean_database_db" "mongodb_dbs" {
+  count = var.engine == "mongodb" ? length(var.databases) : 0
+
+  cluster_id = digitalocean_database_cluster.do_mongodb[0].id
+  name       = var.databases[count.index]
+}
+
 resource "digitalocean_database_user" "sql_users" {
   count = var.engine == "mysql" ? length(var.users) : 0
 
   cluster_id = digitalocean_database_cluster.do_sql[0].id
 
   name = var.users[count.index]
-}
-
-resource "digitalocean_database_user" "redis_users" {
-  count = var.engine == "redis" ? length(var.users) : 0
-
-  cluster_id = digitalocean_database_cluster.do_redis[0].id
-  name       = var.users[count.index]
 }
 
 resource "digitalocean_database_user" "pg_users" {
@@ -202,7 +219,7 @@ resource "digitalocean_database_replica" "pg_replicas" {
   name                 = var.replicas[count.index].name
   size                 = lookup(var.replicas[count.index], "size", var.size)
   region               = lookup(var.replicas[count.index], "region", var.region)
-  tags                 = lookup(var.replicas[count.index], "tags", [])
+  tags                 = lookup(var.replicas[count.index], "tags", var.tags)
   private_network_uuid = lookup(var.replicas[count.index], "private_network_uuid", null)
 }
 

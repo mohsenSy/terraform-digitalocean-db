@@ -1,16 +1,17 @@
 
 module "sql_db" {
   source  = "mohsenSy/db/digitalocean"
-  version = "0.2.1"
+  version = "0.3.1"
 
-  name       = "sql_db"
+  name       = "sql-db"
   engine     = "mysql"
   size       = "db-s-1vcpu-1gb"
   region     = "fra1"
   node_count = 1
   db_version = "8"
 
-  users = ["mouhsen", "sami"]
+  users     = ["mouhsen", "sami"]
+  databases = ["users"]
 }
 
 output "host" {
