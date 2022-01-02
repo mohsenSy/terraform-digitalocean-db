@@ -59,3 +59,8 @@ output "pools" {
   description = "A list of created connetcion pool objects"
   value = digitalocean_database_connection_pool.pg_pools
 }
+
+output "additional_databases" {
+  description = "A list of additional databases created in the database cluster"
+  value       = concat(digitalocean_database_db.dbs[*].name, digitalocean_database_user.mongodb_dbs[*].name, digitalocean_database_user.pg_dbs[*].name, digitalocean_database_user.sql_dbs[*].name)
+}
