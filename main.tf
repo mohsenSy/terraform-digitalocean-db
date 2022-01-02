@@ -68,6 +68,7 @@ resource "digitalocean_database_cluster" "do_redis" {
   region     = var.region
   node_count = var.node_count
   version    = var.db_version
+  tags       = var.tags
 
   eviction_policy = var.eviction_policy
   maintenance_window {
@@ -86,6 +87,7 @@ resource "digitalocean_database_cluster" "do_pg" {
   region     = var.region
   node_count = var.node_count
   version    = var.db_version
+  tags       = var.tags
 
   maintenance_window {
     day  = var.maintenance_window.day
@@ -103,6 +105,7 @@ resource "digitalocean_database_cluster" "do_mongodb" {
   region     = var.region
   node_count = var.node_count
   version    = var.db_version
+  tags       = var.tags
 
   maintenance_window {
     day  = var.maintenance_window.day
@@ -163,6 +166,34 @@ resource "digitalocean_database_firewall" "mongodb_firewall" {
       value = rule.value.value
     }
   }
+}
+
+resource "digitalocean_database_db" "sql_dbs" {
+  count = var.engine == "mysql" ? length(var.databases) : 0
+
+  cluster_id = digitalocean_database_cluster.do_sql[0].id
+  name       = var.databases[count.index]
+}
+
+resource "digitalocean_database_db" "redis_dbs" {
+  count = var.engine == "redis" ? length(var.databases) : 0
+
+  cluster_id = digitalocean_database_cluster.do_redis[0].id
+  name       = var.databases[count.index]
+}
+
+resource "digitalocean_database_db" "pg_dbs" {
+  count = var.engine == "pg" ? length(var.databases) : 0
+
+  cluster_id = digitalocean_database_cluster.do_pg[0].id
+  name       = var.databases[count.index]
+}
+
+resource "digitalocean_database_db" "mongodb_dbs" {
+  count = var.engine == "mongodb" ? length(var.databases) : 0
+
+  cluster_id = digitalocean_database_cluster.do_mongodb[0].id
+  name       = var.databases[count.index]
 }
 
 resource "digitalocean_database_user" "sql_users" {
