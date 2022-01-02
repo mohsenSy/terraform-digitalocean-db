@@ -1,7 +1,7 @@
 
 module "redis_db" {
   source  = "mohsenSy/db/digitalocean"
-  version = "0.3.0"
+  version = "0.3.1"
 
   name       = "redis-db"
   engine     = "redis"

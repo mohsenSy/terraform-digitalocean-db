@@ -1,7 +1,7 @@
 
 module "mongodb_db" {
   source  = "mohsenSy/db/digitalocean"
-  version = "0.3.0"
+  version = "0.3.1"
 
   name       = "mongodb-db"
   engine     = "mongodb"
