@@ -35,10 +35,9 @@ EOF
 %{if var.engine == "mysql"}${digitalocean_database_cluster.do_sql[0].password}%{else}%{if var.engine == "redis"}${digitalocean_database_cluster.do_redis[0].password}%{else}%{if var.engine == "pg"}${digitalocean_database_cluster.do_pg[0].password}%{else}%{if var.engine == "mongodb"}${digitalocean_database_cluster.do_mongodb[0].password}%{endif}%{endif}%{endif}%{endif}
 EOF
 
-
   passwords = zipmap(var.users, concat(digitalocean_database_user.mongodb_users[*].password, digitalocean_database_user.pg_users[*].password, digitalocean_database_user.sql_users[*].password))
-
 }
+
 resource "digitalocean_database_cluster" "do_sql" {
 
   count = var.engine == "mysql" ? 1 : 0
