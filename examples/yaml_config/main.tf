@@ -10,7 +10,7 @@ locals {
 
 module "dodbs" {
   source  = "mohsenSy/db/digitalocean"
-  version = "0.3.1"
+  version = "0.3.2"
 
   for_each = local.do_dbs
 
