@@ -42,13 +42,14 @@ resource "digitalocean_database_cluster" "do_sql" {
 
   count = var.engine == "mysql" ? 1 : 0
 
-  name       = var.name
-  engine     = var.engine
-  size       = var.size
-  region     = var.region
-  node_count = var.node_count
-  version    = var.db_version
-  tags       = var.tags
+  name                 = var.name
+  engine               = var.engine
+  size                 = var.size
+  region               = var.region
+  private_network_uuid = var.private_network_uuid
+  node_count           = var.node_count
+  version              = var.db_version
+  tags                 = var.tags
 
   sql_mode = var.sql_mode
   maintenance_window {
@@ -61,13 +62,14 @@ resource "digitalocean_database_cluster" "do_redis" {
 
   count = var.engine == "redis" ? 1 : 0
 
-  name       = var.name
-  engine     = var.engine
-  size       = var.size
-  region     = var.region
-  node_count = var.node_count
-  version    = var.db_version
-  tags       = var.tags
+  name                 = var.name
+  engine               = var.engine
+  size                 = var.size
+  region               = var.region
+  private_network_uuid = var.private_network_uuid
+  node_count           = var.node_count
+  version              = var.db_version
+  tags                 = var.tags
 
   eviction_policy = var.eviction_policy
   maintenance_window {
@@ -80,13 +82,14 @@ resource "digitalocean_database_cluster" "do_pg" {
 
   count = var.engine == "pg" ? 1 : 0
 
-  name       = var.name
-  engine     = var.engine
-  size       = var.size
-  region     = var.region
-  node_count = var.node_count
-  version    = var.db_version
-  tags       = var.tags
+  name                 = var.name
+  engine               = var.engine
+  size                 = var.size
+  region               = var.region
+  private_network_uuid = var.private_network_uuid
+  node_count           = var.node_count
+  version              = var.db_version
+  tags                 = var.tags
 
   maintenance_window {
     day  = var.maintenance_window.day
@@ -98,13 +101,14 @@ resource "digitalocean_database_cluster" "do_mongodb" {
 
   count = var.engine == "mongodb" ? 1 : 0
 
-  name       = var.name
-  engine     = var.engine
-  size       = var.size
-  region     = var.region
-  node_count = var.node_count
-  version    = var.db_version
-  tags       = var.tags
+  name                 = var.name
+  engine               = var.engine
+  size                 = var.size
+  region               = var.region
+  private_network_uuid = var.private_network_uuid
+  node_count           = var.node_count
+  version              = var.db_version
+  tags                 = var.tags
 
   maintenance_window {
     day  = var.maintenance_window.day

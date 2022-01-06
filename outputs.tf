@@ -64,3 +64,8 @@ output "additional_databases" {
   description = "A list of additional databases created in the database cluster"
   value       = concat(digitalocean_database_db.mongodb_dbs[*].name, digitalocean_database_db.pg_dbs[*].name, digitalocean_database_db.sql_dbs[*].name)
 }
+
+output "private_network_uuid" {
+  description = "The ID of the VPC where the database cluster will be located"
+  value       = concat(digitalocean_database_cluster.do_redis[*].private_network_uuid, digitalocean_database_cluster.do_mongodb[*].private_network_uuid, digitalocean_database_cluster.do_pg[*].private_network_uuid, digitalocean_database_cluster.do_sql[*].private_network_uuid)
+}
