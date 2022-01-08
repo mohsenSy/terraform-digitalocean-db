@@ -36,6 +36,7 @@ EOF
 EOF
 
   passwords = zipmap(var.users, concat(digitalocean_database_user.mongodb_users[*].password, digitalocean_database_user.pg_users[*].password, digitalocean_database_user.sql_users[*].password))
+  private_network_uuid = var.private_network_uuid == "" ? null : var.private_network_uuid
 }
 
 resource "digitalocean_database_cluster" "do_sql" {
@@ -46,7 +47,7 @@ resource "digitalocean_database_cluster" "do_sql" {
   engine               = var.engine
   size                 = var.size
   region               = var.region
-  private_network_uuid = var.private_network_uuid
+  private_network_uuid = local.private_network_uuid
   node_count           = var.node_count
   version              = var.db_version
   tags                 = var.tags
@@ -66,7 +67,7 @@ resource "digitalocean_database_cluster" "do_redis" {
   engine               = var.engine
   size                 = var.size
   region               = var.region
-  private_network_uuid = var.private_network_uuid
+  private_network_uuid = local.private_network_uuid
   node_count           = var.node_count
   version              = var.db_version
   tags                 = var.tags
@@ -86,7 +87,7 @@ resource "digitalocean_database_cluster" "do_pg" {
   engine               = var.engine
   size                 = var.size
   region               = var.region
-  private_network_uuid = var.private_network_uuid
+  private_network_uuid = local.private_network_uuid
   node_count           = var.node_count
   version              = var.db_version
   tags                 = var.tags
@@ -105,7 +106,7 @@ resource "digitalocean_database_cluster" "do_mongodb" {
   engine               = var.engine
   size                 = var.size
   region               = var.region
-  private_network_uuid = var.private_network_uuid
+  private_network_uuid = local.private_network_uuid
   node_count           = var.node_count
   version              = var.db_version
   tags                 = var.tags
