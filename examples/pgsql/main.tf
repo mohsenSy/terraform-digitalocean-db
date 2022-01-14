@@ -1,7 +1,7 @@
 
 module "pg_db" {
   source  = "mohsenSy/db/digitalocean"
-  version = "0.3.2"
+  version = "0.3.3"
 
   name       = "pg-db"
   engine     = "pg"
